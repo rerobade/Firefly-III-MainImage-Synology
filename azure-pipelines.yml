@@ -41,15 +41,9 @@ jobs:
     displayName: 'Set up builder'
   - script: |
       cd MainImage
-      ls
       # label
       LABEL=${{ parameters.buildVersion }}
       VERSION=${{ parameters.buildVersion }}
-
-      echo "Version is $VERSION"
-      echo "Version is ${{ parameters.buildVersion }}"
-
-      cat Dockerfile
 
       # if the version is an alpha version, push to "alpha":
       if [[ ${{ parameters.buildVersion }} == *"alpha"* ]]; then
