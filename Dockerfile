@@ -1,6 +1,6 @@
 ARG build_platform
 ARG build_base
-ARG version
+ARG build_version
 FROM fireflyiii/base:$build_base-$build_platform
 
 # USER nonroot
@@ -10,7 +10,7 @@ FROM fireflyiii/base:$build_base-$build_platform
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY entrypoint-fpm.sh /usr/local/bin/entrypoint-fpm.sh
 
-ENV VERSION=$version
+ENV VERSION=$build_version
 
 # install Firefly III and execute finalize-image.
 RUN curl -SL https://github.com/firefly-iii/firefly-iii/archive/$VERSION.tar.gz | tar xzC $FIREFLY_III_PATH --strip-components 1 && \
