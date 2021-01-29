@@ -42,6 +42,7 @@ jobs:
   - script: |
       # label
       LABEL=${{ parameters.buildVersion }}
+      VERSION=${{ parameters.buildVersion }}
 
       # if the version is an alpha version, push to "alpha":
       if [[ ${{ parameters.buildVersion }} == *"alpha"* ]]; then
