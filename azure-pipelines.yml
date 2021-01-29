@@ -68,3 +68,5 @@ jobs:
     displayName: 'Build!'
     env:
       VERSION: ${{ parameters.buildVersion }}
+  - checkout: self
+    clean: true
