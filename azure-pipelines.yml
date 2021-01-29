@@ -40,6 +40,7 @@ jobs:
       docker buildx use firefly_iii_builder
     displayName: 'Set up builder'
   - script: |
+      cd MainImage
       ls
       # label
       LABEL=${{ parameters.buildVersion }}
