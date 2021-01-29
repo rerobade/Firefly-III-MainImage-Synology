@@ -19,7 +19,10 @@ parameters:
   displayName: Repository name
   type: string
   default: jc5x/test-repository
-
+- name: buildVersion
+  displayName: Which version to build
+  type: string
+  default: develop
 
 jobs:
 - job: BuildFF3
