@@ -1,7 +1,6 @@
 trigger: none
 pr: none
 
-
 parameters:
 - name: buildPhpVersion
   displayName: Build PHP version
@@ -46,6 +45,8 @@ jobs:
 
       echo "Version is $VERSION"
       echo "Version is ${{ parameters.buildVersion }}"
+
+      cat Dockerfile
 
       # if the version is an alpha version, push to "alpha":
       if [[ ${{ parameters.buildVersion }} == *"alpha"* ]]; then
