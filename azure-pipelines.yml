@@ -40,7 +40,6 @@ jobs:
       docker buildx use firefly_iii_builder
     displayName: 'Set up builder'
   - script: |
-      cd MainImage
       # label
       LABEL=${{ parameters.buildVersion }}
 
@@ -63,3 +62,5 @@ jobs:
       echo docker buildx build --platform ${{ parameters.platforms }} --build-arg version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push . -f Dockerfile
       docker buildx build --platform ${{ parameters.platforms }} --build-arg version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push . -f Dockerfile
     displayName: 'Build!'
+    env:
+      VERSION: ${{ parameters.buildVersion }}
