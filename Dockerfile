@@ -10,8 +10,6 @@ FROM fireflyiii/base:$build_base-$build_platform
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY entrypoint-fpm.sh /usr/local/bin/entrypoint-fpm.sh
 
-ENV VERSION=$build_version
-
 # install Firefly III and execute finalize-image.
 RUN "The version is '$VERSION'"
 RUN "The version is '$build_version'"
