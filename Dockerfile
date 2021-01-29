@@ -1,8 +1,10 @@
-FROM fireflyiii/base:apache-7.4
+ARG build_platform
+ARG build_base
+FROM fireflyiii/base:$build_base-$build_platform
 
 # USER nonroot
 
-# See also: https://dev.azure.com/firefly-iii/BaseImage
+# See also: https://dev.azure.com/firefly-iii/MainImage
 
 ARG version
 ENV VERSION=$version
