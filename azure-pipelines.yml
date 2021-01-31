@@ -71,11 +71,11 @@ jobs:
 
 
       # build $LABEL (develop, alpha, beta or latest)
-      docker buildx build --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
+      docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
 
       # build version-$VERSION if not "develop".
       if [[ ${{ parameters.buildVersion }} != "develop" ]]; then
-        docker buildx build --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:version-${{ parameters.buildVersion }} --push .
+        docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:version-${{ parameters.buildVersion }} --push .
       fi
 
     displayName: 'Build!'
