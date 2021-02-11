@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Now in entrypoint.sh for Firefly III"
-echo "Entrypoint script version is 1.0.12 (2020-12-16)"
+echo "Entrypoint script version is 1.0.13 (2021-02-11)"
 echo "Running as '$(whoami)' in group '$(id -g -n)'."
 echo "Current working dir is '$(pwd)'"
 
@@ -112,6 +112,10 @@ fi
 if [[ -n "$DB_PORT" ]]; then
   /usr/local/bin/wait-for-it.sh "${DB_HOST}:${DB_PORT}" -t 60 -- echo "DB is up. Time to execute artisan commands."
 fi
+
+echo "Build in extra wait time because DB."
+sleep 15
+echo "Done waiting."
 
 echo "Current working dir is '$(pwd)'"
 echo "Run various artisan commands..."
