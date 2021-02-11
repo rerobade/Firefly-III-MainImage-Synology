@@ -113,9 +113,9 @@ if [[ -n "$DB_PORT" ]]; then
   /usr/local/bin/wait-for-it.sh "${DB_HOST}:${DB_PORT}" -t 60 -- echo "DB is up. Time to execute artisan commands."
 fi
 
-echo "Build in extra wait time because DB."
+echo "Wait another 15 seconds in case the DB needs to boot."
 sleep 15
-echo "Done waiting."
+echo "Done waiting for the DB to boot."
 
 echo "Current working dir is '$(pwd)'"
 echo "Run various artisan commands..."
