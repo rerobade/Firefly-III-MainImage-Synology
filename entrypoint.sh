@@ -95,7 +95,7 @@ fi
 
 
 echo "Dump auto load..."
-composer install adldap2/adldap2-laravel
+composer require adldap2/adldap2-laravel
 composer dump-autoload
 echo "Discover packages..."
 php artisan package:discover
