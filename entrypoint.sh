@@ -95,9 +95,10 @@ fi
 
 
 echo "Dump auto load..."
-composer dump-autoload > /dev/null 2>&1
+composer install adldap2/adldap2-laravel
+composer dump-autoload
 echo "Discover packages..."
-php artisan package:discover > /dev/null 2>&1
+php artisan package:discover
 
 echo "Current working dir is '$(pwd)'"
 
