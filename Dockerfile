@@ -2,9 +2,7 @@ ARG build_platform
 ARG build_base
 FROM fireflyiii/base:$build_base-$build_platform
 
-# USER nonroot
-
-# See also: https://dev.azure.com/firefly-iii/MainImage
+# For more information about fireflyiii/base visit https://dev.azure.com/firefly-iii/BaseImage
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY entrypoint-fpm.sh /usr/local/bin/entrypoint-fpm.sh
