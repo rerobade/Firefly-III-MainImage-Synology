@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Now in entrypoint.sh for Firefly III"
-echo "Entrypoint script version is 1.0.13 (2021-02-11)"
+echo "Entrypoint script version is 1.0.14 (2021-04-12)"
 echo "Running as '$(whoami)' in group '$(id -g -n)'."
 echo "Current working dir is '$(pwd)'"
 
