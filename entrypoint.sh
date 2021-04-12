@@ -99,6 +99,10 @@ if [[ $LOGIN_PROVIDER == "ldap" ]]; then
 	composer install --no-dev --no-scripts --no-plugins --no-progress
 fi
 
+if [[ $LOGIN_PROVIDER != "ldap" ]]; then
+	echo "Will not download LDAP packages."
+fi
+
 echo "Dump auto load..."
 composer dump-autoload
 echo "Discover packages..."
