@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Now in entrypoint.sh for Firefly III"
-echo "Entrypoint script version is 1.0.14 (2021-04-12)"
+echo "Entrypoint script version is 1.0.15 (2021-05-01)"
 echo "Running as '$(whoami)' in group '$(id -g -n)'."
 echo "Current working dir is '$(pwd)'"
 
@@ -140,6 +140,8 @@ fi
 
 echo "Current working dir is '$(pwd)'"
 
+artisan firefly-iii:fix-pgsql-sequences
+
 # there are 13 upgrade commands
 if [[ $DKR_RUN_UPGRADE == "false" ]]; then
   echo 'Will NOT run upgrade commands.'
@@ -158,6 +160,8 @@ else
   php artisan firefly-iii:back-to-journals
   php artisan firefly-iii:rename-account-meta
   php artisan firefly-iii:migrate-recurrence-meta
+  php artisan firefly-iii:migrate-tag-locations
+  php artisan firefly-iii:migrate-recurrence-type
 fi
 
 # there are 15 verify commands
@@ -181,6 +185,9 @@ else
   php artisan firefly-iii:fix-ob-currencies
   php artisan firefly-iii:fix-long-descriptions
   php artisan firefly-iii:fix-recurring-transactions
+  php artisan firefly-iii:unify-group-accounts
+  php artisan firefly-iii:fix-transaction-types
+  php artisan firefly-iii:fix-frontpage-accounts
 fi
 
 # report commands
