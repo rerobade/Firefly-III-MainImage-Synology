@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Now in entrypoint.sh for Firefly III"
-echo "Entrypoint script version is 1.0.15 (2021-05-01)"
+echo "Entrypoint script version is 1.0.16 (2021-05-01)"
 echo "Running as '$(whoami)' in group '$(id -g -n)'."
 echo "Current working dir is '$(pwd)'"
 
@@ -122,8 +122,8 @@ if [[ -n "$DB_PORT" ]]; then
   /usr/local/bin/wait-for-it.sh "${DB_HOST}:${DB_PORT}" -t 60 -- echo "DB is up. Time to execute artisan commands."
 fi
 
-echo "Wait another 15 seconds in case the DB needs to boot."
-sleep 15
+echo "Wait another 5 seconds in case the DB needs to boot."
+sleep 5
 echo "Done waiting for the DB to boot."
 
 echo "Current working dir is '$(pwd)'"
@@ -140,7 +140,7 @@ fi
 
 echo "Current working dir is '$(pwd)'"
 
-artisan firefly-iii:fix-pgsql-sequences
+php artisan firefly-iii:fix-pgsql-sequences
 
 # there are 13 upgrade commands
 if [[ $DKR_RUN_UPGRADE == "false" ]]; then
