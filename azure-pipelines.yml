@@ -25,7 +25,7 @@ parameters:
 - name: repository
   displayName: Repository name
   type: string
-  default: jc5x/firefly-iii
+  default: fireflyiii/core
 - name: buildVersion
   displayName: Which version to build
   type: string
