@@ -1,4 +1,23 @@
-[{
+[
+	{
+		"version": "1.0.0",
+		"advisory": true,
+		"level": "info",
+		"message": "Info level, basic alert."
+	},
+	{
+		"version": "2.0.0",
+		"advisory": true,
+		"level": "warning",
+		"message": "Warning level, bit more serious."
+	},
+	{
+		"version": "3.0.0",
+		"advisory": true,
+		"level": "danger",
+		"message": "Danger level, user must act."
+	},
+	{
 		"version": "5.5.0",
 		"advisory": true,
 		"level": "info",
