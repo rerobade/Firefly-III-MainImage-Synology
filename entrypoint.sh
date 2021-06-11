@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Now in entrypoint.sh for Firefly III"
-echo "Entrypoint script version is 1.0.16 (2021-05-01)"
+echo "Entrypoint script version is 1.0.17 (2021-06-11)"
 echo "Running as '$(whoami)' in group '$(id -g -n)'."
 echo "Current working dir is '$(pwd)'"
 
@@ -215,6 +215,7 @@ php artisan config:cache > /dev/null 2>&1
 # set docker var.
 export IS_DOCKER=true
 
+php artisan firefly-iii:verify-security-alerts
 php artisan firefly:instructions install
 
 if [ -z $APACHE_RUN_USER ]
