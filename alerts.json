@@ -97,7 +97,7 @@
 	},
 	{
 		"version": "5.6.0-alpha.1",
-		"advisory": true,
+		"advisory": false,
 		"level": "info",
 		"message": "Test info level system alert."
 	}
