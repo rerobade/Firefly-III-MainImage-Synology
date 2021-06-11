@@ -13,4 +13,6 @@ RUN curl -SL https://github.com/firefly-iii/firefly-iii/archive/$VERSION.tar.gz 
     chmod -R 775 $FIREFLY_III_PATH/storage && \
     composer install --prefer-dist --no-dev --no-scripts && /usr/local/bin/finalize-image.sh
 
+COPY alerts.json /var/www/html/resources/alerts.json
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

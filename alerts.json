@@ -94,5 +94,11 @@
 		"advisory": false,
 		"level": "info",
 		"message": "You should upgrade to a newer version."
+	},
+	{
+		"version": "5.6.0-alpha.1",
+		"advisory": true,
+		"level": "info",
+		"message": "Test info level system alert."
 	}
 ]
