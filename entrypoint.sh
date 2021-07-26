@@ -215,7 +215,7 @@ php artisan config:cache > /dev/null 2>&1
 # set docker var.
 export IS_DOCKER=true
 
-php artisan firefly-iii:verify-security-alerts
+#php artisan firefly-iii:verify-security-alerts
 php artisan firefly:instructions install
 
 if [ -z $APACHE_RUN_USER ]
