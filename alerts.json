@@ -86,14 +86,14 @@
 	{
 		"version": "5.5.11",
 		"advisory": true,
-		"level": "danger",
-		"message": "This version of Firefly III contains a security vulnerability, and you should update as soon as possible."
+		"level": "warning",
+		"message": "This version of Firefly III contains a security vulnerability (Google CVE-2021-3663), and you should update as soon as possible."
 	},
 	{
-		"version": "5.5.12",
-		"advisory": false,
-		"level": "info",
-		"message": "You should upgrade to a newer version."
+		"version": "5.5.11",
+		"advisory": true,
+		"level": "warning",
+		"message": "This version of Firefly III contains a security vulnerability (Google CVE-2021-3663), and you should update as soon as possible."
 	},
 	{
 		"version": "5.6.0-alpha.1",
