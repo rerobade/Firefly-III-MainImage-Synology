@@ -94,12 +94,12 @@ if [[ $DKR_CHECK_SQLITE != "false" ]]; then
 fi
 
 # install LDAP only when necessary.
-if [[ $LOGIN_PROVIDER == "ldap" ]]; then
-	composer require adldap2/adldap2-laravel --no-install --no-scripts --no-plugins --no-progress
+if [[ $AUTHENTICATION_GUARD == "ldap" ]]; then
+	composer require directorytree/ldaprecord-laravel --no-install --no-scripts --no-plugins --no-progress
 	composer install --no-dev --no-scripts --no-plugins --no-progress
 fi
 
-if [[ $LOGIN_PROVIDER != "ldap" ]]; then
+if [[ $AUTHENTICATION_GUARD != "ldap" ]]; then
 	echo "Will not download LDAP packages."
 fi
 
