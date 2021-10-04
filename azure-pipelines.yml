@@ -52,7 +52,7 @@ jobs:
   - script: |
       cd MainImage
       ls -lah
-      git switch -
+      git switch -c main
       echo "Update counters"
       BUILDNR=$(<"counter.txt")
       BUILDNR=$((BUILDNR + 1))
