@@ -53,6 +53,7 @@ jobs:
       cd MainImage
       ls -lah
       git switch -c main
+      git branch --set-upstream-to=origin/main main
       echo "Update counters"
       BUILDNR=$(<"counter.txt")
       BUILDNR=$((BUILDNR + 1))
