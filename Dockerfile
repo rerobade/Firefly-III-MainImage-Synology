@@ -6,6 +6,8 @@ FROM fireflyiii/base:$build_base-$build_platform
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY entrypoint-fpm.sh /usr/local/bin/entrypoint-fpm.sh
+COPY counter.txt /var/www/counter-main.txt
+COPY date.txt /var/www/build-date-main.txt
 
 ARG version
 ENV VERSION=$version
