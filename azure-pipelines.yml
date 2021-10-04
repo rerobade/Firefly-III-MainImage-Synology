@@ -57,7 +57,9 @@ jobs:
 
     displayName: 'Update counters'
   - script: |
+      ls -lah
       cd MainImage
+      ls -lah
       git checkout main
       git pull
       git status
