@@ -48,18 +48,14 @@ jobs:
       docker buildx use firefly_iii_builder
     displayName: 'Set up builder'
   - script: |
+      ls -lah
       cd MainImage
+      ls -lah
       echo "Update counters"
       BUILDNR=$(<"counter.txt")
       BUILDNR=$((BUILDNR + 1))
       echo $BUILDNR > counter.txt
       echo $(date '+%m-%d-%Y %T') > date.txt
-
-    displayName: 'Update counters'
-  - script: |
-      ls -lah
-      cd MainImage
-      ls -lah
       git checkout main
       git pull
       git status
