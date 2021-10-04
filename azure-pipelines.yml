@@ -65,7 +65,7 @@ jobs:
       git add date.txt
       git commit -m "Auto-update build files."
       git push
-    displayName: 'Commit changed to Git.'
+    displayName: 'Commit changes to Git.'
   - script: |
       set -euo pipefail
       cd MainImage
