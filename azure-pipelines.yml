@@ -48,6 +48,14 @@ jobs:
       docker buildx use firefly_iii_builder
     displayName: 'Set up builder'
   - script: |
+      echo "Update counters"
+      BUILDNR=$(<"counter.txt")
+      BUILDNR=$((BUILDNR + 1))
+      echo "New buildnr is $BUILDNR"
+      echo $BUILDNR > counter.txt
+
+    displayName: 'Update counters'
+  - script: |
       set -euo pipefail
       cd MainImage
       # label
