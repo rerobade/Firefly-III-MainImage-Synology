@@ -52,10 +52,20 @@ jobs:
       echo "Update counters"
       BUILDNR=$(<"counter.txt")
       BUILDNR=$((BUILDNR + 1))
-      echo "New buildnr is $BUILDNR"
       echo $BUILDNR > counter.txt
+      echo $(date '+%m-%d-%Y %T') > date.txt
 
     displayName: 'Update counters'
+  - script: |
+      cd MainImage
+      git checkout main
+      git pull
+      git status
+      git add counter.txt
+      git add date.txt
+      git commit -m "Auto-update build files."
+      git push
+    displayName: 'Commit changed to Git.'
   - script: |
       set -euo pipefail
       cd MainImage
