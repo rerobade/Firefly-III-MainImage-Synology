@@ -56,7 +56,6 @@ jobs:
       BUILDNR=$((BUILDNR + 1))
       echo $BUILDNR > counter.txt
       echo $(date '+%m-%d-%Y %T') > date.txt
-      git checkout main
       git pull
       git status
       git add counter.txt
