@@ -165,6 +165,8 @@ else
   php artisan firefly-iii:migrate-recurrence-meta
   php artisan firefly-iii:migrate-tag-locations
   php artisan firefly-iii:migrate-recurrence-type
+  php artisan firefly-iii:upgrade-liabilities
+  php artisan firefly-iii:create-group-memberships
 fi
 
 # there are 15 verify commands
@@ -191,6 +193,8 @@ else
   php artisan firefly-iii:unify-group-accounts
   php artisan firefly-iii:fix-transaction-types
   php artisan firefly-iii:fix-frontpage-accounts
+  php artisan firefly-iii:fix-account-order
+  php artisan firefly-iii:fix-ibans
 fi
 
 # report commands
@@ -218,7 +222,7 @@ php artisan config:cache > /dev/null 2>&1
 # set docker var.
 export IS_DOCKER=true
 
-#php artisan firefly-iii:verify-security-alerts
+php artisan firefly-iii:verify-security-alerts
 php artisan firefly:instructions install
 
 if [ -z $APACHE_RUN_USER ]
