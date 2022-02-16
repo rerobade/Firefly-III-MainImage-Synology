@@ -79,6 +79,7 @@ envs=(
 	ADLDAP_SYNC_FIELD
 	TRACKER_SITE_ID
 	TRACKER_URL
+	STATIC_CRON_TOKEN
 )
 
 echo "Now parsing _FILE variables."
