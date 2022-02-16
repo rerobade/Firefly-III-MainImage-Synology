@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Now in entrypoint.sh for Firefly III"
-echo "Script:       1.0.20 (2022-01-09)"
+echo "Script:       1.0.21 (2022-02-17)"
 echo "User:         '$(whoami)'"
 echo "Group:        '$(id -g -n)'"
 echo "Working dir:  '$(pwd)'"
