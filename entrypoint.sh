@@ -118,7 +118,7 @@ echo "Check locale settings..."
 if [[ $DKR_BUILD_LOCALE != "" ]]; then
   echo "Will build extra locales..."
 
-  cat $DKR_BUILD_LOCALE | sed -n 1'p' | tr ',' '\n' | while read language; do
+  echo $DKR_BUILD_LOCALE | sed -n 1'p' | tr ',' '\n' | while read language; do
       echo "Will now build: $language"
   done
 
