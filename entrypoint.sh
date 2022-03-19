@@ -65,18 +65,9 @@ envs=(
 	MAPBOX_API_KEY
 	FIXER_API_KEY
 	LOGIN_PROVIDER
-	ADLDAP_CONNECTION_SCHEME
-	ADLDAP_CONTROLLERS
-	ADLDAP_PORT
-	ADLDAP_BASEDN
-	ADLDAP_ADMIN_USERNAME
-	ADLDAP_ADMIN_PASSWORD
-	ADLDAP_ACCOUNT_PREFIX
-	ADLDAP_ACCOUNT_SUFFIX
 	WINDOWS_SSO_ENABLED
 	WINDOWS_SSO_DISCOVER
 	WINDOWS_SSO_KEY
-	ADLDAP_SYNC_FIELD
 	TRACKER_SITE_ID
 	TRACKER_URL
 	STATIC_CRON_TOKEN
@@ -95,16 +86,6 @@ if [[ $DKR_CHECK_SQLITE != "false" ]]; then
     touch $FIREFLY_III_PATH/storage/database/database.sqlite
     echo "Touched!"
   fi
-fi
-
-# install LDAP only when necessary.
-if [[ $AUTHENTICATION_GUARD == "ldap" ]]; then
-	composer require directorytree/ldaprecord-laravel --no-install --no-scripts --no-plugins --no-progress
-	composer install --no-dev --no-scripts --no-plugins --no-progress
-fi
-
-if [[ $AUTHENTICATION_GUARD != "ldap" ]]; then
-	echo "Will not download LDAP packages."
 fi
 
 echo "Dump auto load..."
@@ -132,6 +113,13 @@ echo "Done waiting for the DB to boot."
 
 echo "Current working dir is '$(pwd)'"
 echo "Run various artisan commands..."
+
+if [[ $DKR_BUILD_LOCALE != "" ]]; then
+  echo "Will build extra locales..."
+else
+  echo "Will not build extra locales..."
+fi
+
 
 if [[ $DKR_RUN_MIGRATION == "false" ]]; then
   echo "Will NOT run migration commands."
