@@ -112,13 +112,23 @@ sleep 5
 echo "Done waiting for the DB to boot."
 
 echo "Current working dir is '$(pwd)'"
-echo "Run various artisan commands..."
+
+echo "Check locale settings..."
 
 if [[ $DKR_BUILD_LOCALE != "" ]]; then
   echo "Will build extra locales..."
+
+  cat $DKR_BUILD_LOCALE | sed -n 1'p' | tr ',' '\n' | while read language; do
+      echo "Will now build: $language"
+  done
+
 else
   echo "Will not build extra locales..."
 fi
+
+echo "End of check on locale settings..."
+
+echo "Run various artisan commands..."
 
 
 if [[ $DKR_RUN_MIGRATION == "false" ]]; then
