@@ -104,32 +104,21 @@ if [[ -z "$DB_PORT" ]]; then
   fi
 fi
 if [[ -n "$DB_PORT" ]]; then
-  /usr/local/bin/wait-for-it.sh "${DB_HOST}:${DB_PORT}" -t 60 -- echo "DB is up. Time to execute artisan commands."
+  /usr/local/bin/wait-for-it.sh "${DB_HOST}:${DB_PORT}" -t 60 -- echo "DB is up."
 fi
 
 echo "Wait another 5 seconds in case the DB needs to boot."
 sleep 5
 echo "Done waiting for the DB to boot."
 
-echo "Current working dir is '$(pwd)'"
-
-echo "Check locale settings..."
-
-if [[ $DKR_BUILD_LOCALE != "" ]]; then
-  echo "Will build extra locales..."
-
-  echo $DKR_BUILD_LOCALE | sed -n 1'p' | tr ',' '\n' | while read language; do
-      echo "Will now build: $language"
-  done
-
+if [[ $DKR_BUILD_LOCALE == "true" ]]; then
+  echo "Will build all locales..."
+  locale-gen
 else
-  echo "Will not build extra locales..."
+  echo "Will not build the locales..."
 fi
 
-echo "End of check on locale settings..."
-
 echo "Run various artisan commands..."
-
 
 if [[ $DKR_RUN_MIGRATION == "false" ]]; then
   echo "Will NOT run migration commands."
