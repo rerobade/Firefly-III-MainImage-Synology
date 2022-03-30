@@ -103,7 +103,7 @@
 	},
 	{
 		"version": "5.7.0",
-		"advisory": true,
+		"advisory": false,
 		"level": "info",
 		"message": "Test informational message."
 	}
