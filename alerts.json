@@ -106,5 +106,5 @@
 		"advisory": true,
 		"level": "info",
 		"message": "Test informational message."
-	},
+	}
 ]
