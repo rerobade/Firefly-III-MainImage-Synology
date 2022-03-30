@@ -100,5 +100,11 @@
 		"advisory": false,
 		"level": "info",
 		"message": "Test info level system alert."
-	}
+	},
+	{
+		"version": "5.7.0",
+		"advisory": true,
+		"level": "info",
+		"message": "Test informational message."
+	},
 ]
