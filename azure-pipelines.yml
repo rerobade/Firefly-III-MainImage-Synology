@@ -103,7 +103,7 @@ jobs:
           --build-arg build_base=${{ parameters.buildImageType }} \
           --build-arg build_platform=${{ parameters.buildPhpVersion }} \
           --tag ${{ parameters.repository }}:version-${split[0]} \
-          --tag ${{ parameters.repository }}:version-${split[0]}-${split[1]} \
+          --tag ${{ parameters.repository }}:version-${split[0]}.${split[1]} \
           --tag ${{ parameters.repository }}:version-${{ parameters.buildVersion }} \
           --push .
 
