@@ -94,10 +94,10 @@ jobs:
       # build version-$VERSION if not "develop".
       if [[ ${{ parameters.buildVersion }} != "develop" ]]; then
         # split the version into parts:
-        split=( ${version//./ } )
+        split=( ${VERSION//./ } )
 
         # build major tag
-        docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:version-${split[0]}  --push .
+        docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:version-${split[0]} --push .
 
         # build minor tag
         docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:version-${split[0]}-${split[1]}  --push .
