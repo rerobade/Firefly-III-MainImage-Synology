@@ -95,7 +95,7 @@ jobs:
       fi
 
       # build version-$VERSION if not "develop".
-      if [[ ${{ parameters.buildVersion }} != "dev" ]]; then
+      if [[ ${{ parameters.buildVersion }} != *"dev"* ]]; then
         echo "Will build prod version under tag $LABEL."
         
         # split the version into parts:
