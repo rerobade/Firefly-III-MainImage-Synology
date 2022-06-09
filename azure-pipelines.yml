@@ -83,7 +83,7 @@ jobs:
         LABEL="beta"
       fi
 
-      if [[ ${{ parameters.buildVersion }} != *"beta"* && ${{ parameters.buildVersion }} != *"alpha"* && ${{ parameters.buildVersion }} != *"develop"* ]]; then
+      if [[ ${{ parameters.buildVersion }} != *"beta"* && ${{ parameters.buildVersion }} != *"alpha"* && ${{ parameters.buildVersion }} != *"dev"* ]]; then
         LABEL="latest"
       fi
 
