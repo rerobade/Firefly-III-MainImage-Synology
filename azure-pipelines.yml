@@ -88,11 +88,13 @@ jobs:
       fi
 
 
-      # build $LABEL (develop, alpha, beta or latest)
-      docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
+      # build $LABEL when it's a dev version
+      if [[ ${{ parameters.buildVersion }} == *"dev"* ]]; then
+        docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
+      fi
 
       # build version-$VERSION if not "develop".
-      if [[ ${{ parameters.buildVersion }} != "develop" ]]; then
+      if [[ ${{ parameters.buildVersion }} != "dev" ]]; then
         # split the version into parts:
         currentversion=${{ parameters.buildVersion }}
         split=( ${currentversion//./ } )
@@ -103,6 +105,7 @@ jobs:
           --build-arg build_base=${{ parameters.buildImageType }} \
           --build-arg build_platform=${{ parameters.buildPhpVersion }} \
           --tag ${{ parameters.repository }}:version-${split[0]} \
+          --tag ${{ parameters.repository }}:$LABEL \
           --tag ${{ parameters.repository }}:version-${split[0]}.${split[1]} \
           --tag ${{ parameters.repository }}:version-${{ parameters.buildVersion }} \
           --push .
