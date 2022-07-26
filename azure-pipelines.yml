@@ -91,7 +91,7 @@ jobs:
       # build $LABEL when it's a dev version
       if [[ ${{ parameters.buildVersion }} == *"dev"* ]]; then
         echo "Will build development version under tag '$LABEL'."
-        docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
+        docker buildx build --pull --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
       fi
 
       # build version-$VERSION if not "develop".
