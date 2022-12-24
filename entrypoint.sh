@@ -71,6 +71,8 @@ envs=(
 	TRACKER_SITE_ID
 	TRACKER_URL
 	STATIC_CRON_TOKEN
+  PASSPORT_PRIVATE_KEY
+  PASSPORT_PUBLIC_KEY
 )
 
 echo "Now parsing _FILE variables."
@@ -228,5 +230,5 @@ rm -f $FIREFLY_III_PATH/storage/logs/*.log
 chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP $FIREFLY_III_PATH/storage
 chmod -R 775 $FIREFLY_III_PATH/storage
 
-echo "Go!"
+echo "You can safely ignore the error about the 'fully qualified domain name'."
 exec apache2-foreground
