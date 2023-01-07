@@ -11,7 +11,7 @@ COPY date.txt /var/www/build-date-main.txt
 
 ARG version
 ENV VERSION=$version
-RUN curl -SL https://github.com/firefly-iii/firefly-iii/archive/$VERSION.tar.gz | tar xzC $FIREFLY_III_PATH --strip-components 1 && \
+RUN curl -sSL https://github.com/firefly-iii/firefly-iii/archive/$VERSION.tar.gz | tar xzC $FIREFLY_III_PATH --strip-components 1 && \
     chmod -R 775 $FIREFLY_III_PATH/storage && \
     composer install --prefer-dist --no-dev --no-scripts && /usr/local/bin/finalize-image.sh
 

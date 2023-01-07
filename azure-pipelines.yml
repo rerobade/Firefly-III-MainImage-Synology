@@ -13,7 +13,7 @@ parameters:
 - name: buildPhpVersion
   displayName: Build PHP version
   type: string
-  default: 8.1
+  default: 8.2
 - name: buildImageType
   displayName: Build image type
   type: string
@@ -33,7 +33,7 @@ parameters:
 
 jobs:
 - job: BuildFF3
-  timeoutInMinutes: 360
+  timeoutInMinutes: 10
   workspace:
     clean: all
   pool:
@@ -51,7 +51,6 @@ jobs:
     displayName: 'Set up builder'
   - script: |
       cd MainImage
-      ls -lah
       git switch -c main
       git branch --set-upstream-to=origin/main main
       echo "Update counters"
@@ -91,7 +90,7 @@ jobs:
       # build $LABEL when it's a dev version
       if [[ ${{ parameters.buildVersion }} == *"dev"* ]]; then
         echo "Will build development version under tag '$LABEL'."
-        docker buildx build --pull --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
+        docker buildx build --pull  --progress=plain --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
       fi
 
       # build version-$VERSION if not "develop".
@@ -103,7 +102,7 @@ jobs:
         split=( ${currentversion//./ } )
 
         # build major tag
-        docker buildx build --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} \
+        docker buildx build --progress=plain --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} \
           --build-arg build_version=${{ parameters.buildVersion }} \
           --build-arg build_base=${{ parameters.buildImageType }} \
           --build-arg build_platform=${{ parameters.buildPhpVersion }} \
