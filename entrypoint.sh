@@ -156,7 +156,7 @@ else
   php artisan firefly-iii:migrate-tag-locations
   php artisan firefly-iii:migrate-recurrence-type
   php artisan firefly-iii:upgrade-liabilities
-  php artisan firefly-iii:create-group-memberships
+  php artisan firefly-iii:liabilities-600
 fi
 
 # there are 15 verify commands
@@ -168,6 +168,7 @@ else
   php artisan firefly-iii:create-link-types
   php artisan firefly-iii:create-access-tokens
   php artisan firefly-iii:remove-bills
+  php artisan firefly-iii:fix-negative-limits
   php artisan firefly-iii:enable-currencies
   php artisan firefly-iii:fix-transfer-budgets
   php artisan firefly-iii:fix-uneven-amount
@@ -176,6 +177,7 @@ else
   php artisan firefly-iii:delete-empty-journals
   php artisan firefly-iii:delete-empty-groups
   php artisan firefly-iii:fix-account-types
+  php artisan firefly-iii:fix-account-order
   php artisan firefly-iii:rename-meta-fields
   php artisan firefly-iii:fix-ob-currencies
   php artisan firefly-iii:fix-long-descriptions
@@ -183,8 +185,10 @@ else
   php artisan firefly-iii:unify-group-accounts
   php artisan firefly-iii:fix-transaction-types
   php artisan firefly-iii:fix-frontpage-accounts
-  php artisan firefly-iii:fix-account-order
   php artisan firefly-iii:fix-ibans
+  php artisan firefly-iii:create-group-memberships
+  php artisan firefly-iii:upgrade-group-information
+
 fi
 
 # report commands
