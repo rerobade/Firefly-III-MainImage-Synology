@@ -130,5 +130,5 @@
 		"advisory": true,
 		"level": "warning",
 		"message": "This BETA version of Firefly III has been superseded by a new release. Please upgrade."
-	},
+	}
 ]
