@@ -68,51 +68,93 @@ jobs:
   - script: |
       set -euo pipefail
       cd MainImage
+      # start of script
       # label
-      LABEL=${{ parameters.buildVersion }}
       VERSION=${{ parameters.buildVersion }}
+      #VERSION=6.0.0
+      LABEL=$VERSION
+
+      echo "Input 'LABEL' is $LABEL"
+      echo "Input 'VERSION' is $VERSION"
 
       # if the version is an alpha version, push to "alpha":
-      if [[ ${{ parameters.buildVersion }} == *"alpha"* ]]; then
+      if [[ $VERSION == *"alpha"* ]]; then
         LABEL="alpha"
+        echo "Recognized version as alpha: '$VERSION'"
       fi
 
       # if the version is a beta version, push to "beta":
-      if [[ ${{ parameters.buildVersion }} == *"beta"* ]]; then
+      if [[ $VERSION == *"beta"* ]]; then
+        echo "Recognized version as beta: '$VERSION'"
         LABEL="beta"
       fi
 
-      if [[ ${{ parameters.buildVersion }} != *"beta"* && ${{ parameters.buildVersion }} != *"alpha"* && ${{ parameters.buildVersion }} != *"dev"* ]]; then
+      if [[ $VERSION != *"beta"* && $VERSION != *"alpha"* && $VERSION != *"dev"* ]]; then
+        echo "Recognized version as production: '$VERSION'"
         LABEL="latest"
       fi
 
+      echo "---"
+      echo "final label is '$LABEL'"
+      echo "final version is '$VERSION'"
 
-      # build $LABEL when it's a dev version
-      if [[ ${{ parameters.buildVersion }} == *"dev"* ]]; then
-        echo "Will build development version under tag '$LABEL'."
-        docker buildx build --pull  --progress=plain --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} --build-arg build_version=${{ parameters.buildVersion }} --build-arg build_base=${{ parameters.buildImageType }} --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
+
+
+      # build $LABEL when it's a develop version
+      if [[ $VERSION == *"dev"* ]]; then
+        echo "Will build development under tag '$LABEL'."
+        docker buildx build --pull  --progress=plain --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=$VERSION \
+          --build-arg build_version=$VERSION --build-arg build_base=${{ parameters.buildImageType }} \
+          --build-arg build_platform=${{ parameters.buildPhpVersion }} -t ${{ parameters.repository }}:$LABEL --push .
       fi
 
-      # build version-$VERSION if not "develop".
-      if [[ ${{ parameters.buildVersion }} != *"dev"* ]]; then
-        echo "Will build prod version under tag $LABEL."
+      if [[ $VERSION == *"beta"* || $VERSION == *"alpha"* ]]; then
+        echo "Will build or alpha or beta version under tag '$LABEL' and '$VERSION'."
+        docker buildx build --pull  --progress=plain --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=$VERSION \
+          --build-arg build_version=$VERSION --build-arg build_base=${{ parameters.buildImageType }} \
+          --build-arg build_platform=${{ parameters.buildPhpVersion }} \
+          --tag ${{ parameters.repository }}:$LABEL \
+          --tag ${{ parameters.repository }}:$VERSION \
+          --push .
+      fi
+
+
+
+      # build label AND version-$VERSION if not "develop" and not alpha or beta.
+      if [[ $VERSION != *"beta"* && $VERSION != *"alpha"* && $VERSION != *"dev"* ]]; then
+        echo "Will build prod version '$VERSION' under tag '$LABEL'."
         
+        currentversion=$VERSION
+        # if starts with "v", remove the "v":
+        if [[ $currentversion == v* ]]; then
+          currentversion=${currentversion#*v} 
+          echo "version is now $currentversion"
+        fi
+
+
         # split the version into parts:
-        currentversion=${{ parameters.buildVersion }}
         split=( ${currentversion//./ } )
+
+        echo "Will build production version as '$LABEL'"
+        echo "Will build production version as 'version-${split[0]}'"
+        echo "Will build production version as 'version-${split[0]}.${split[1]}'"
+        echo "Will build production version as 'version-$currentversion'"
 
         # build major tag
         docker buildx build --progress=plain --no-cache --platform ${{ parameters.platforms }} --build-arg VERSION --build-arg version=${{ parameters.buildVersion }} \
           --build-arg build_version=${{ parameters.buildVersion }} \
           --build-arg build_base=${{ parameters.buildImageType }} \
           --build-arg build_platform=${{ parameters.buildPhpVersion }} \
-          --tag ${{ parameters.repository }}:version-${split[0]} \
           --tag ${{ parameters.repository }}:$LABEL \
+          --tag ${{ parameters.repository }}:version-${split[0]} \
           --tag ${{ parameters.repository }}:version-${split[0]}.${split[1]} \
-          --tag ${{ parameters.repository }}:version-${{ parameters.buildVersion }} \
+          --tag ${{ parameters.repository }}:version-$currentversion \
           --push .
 
       fi
+
+
+      # end of script
 
     displayName: 'Build!'
     env:
