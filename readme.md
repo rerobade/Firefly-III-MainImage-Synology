@@ -1,4 +1,4 @@
-# Firefly III Docker image
+# Copy of Offical Firefly III Docker image to show how to make it compatible with my Synology NAS
 
 [![Packagist](https://img.shields.io/packagist/v/grumpydictator/firefly-iii.svg?style=flat-square)](https://packagist.org/packages/grumpydictator/firefly-iii) 
 [![License](https://img.shields.io/github/license/firefly-iii/firefly-iii.svg?style=flat-square])](https://www.gnu.org/licenses/agpl-3.0.html) 
