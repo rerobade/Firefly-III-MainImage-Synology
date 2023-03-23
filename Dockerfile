@@ -1,6 +1,5 @@
-ARG build_platform
-ARG build_base
-FROM fireflyiii/base:$build_base-$build_platform
+ARG build_base_image=fireflyiii/base:apache-8.2
+FROM $build_base_image
 
 # For more information about fireflyiii/base visit https://dev.azure.com/firefly-iii/BaseImage
 
